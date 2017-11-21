@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseLister", "CourseLister\CourseLister.csproj", "{C905B90B-116D-41E0-A5D5-15942FC39098}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canvas.Clients", "Canvas.Clients\Canvas.Clients.csproj", "{910D1903-2C2C-4B52-8AFF-0A88A40C127A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C905B90B-116D-41E0-A5D5-15942FC39098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C905B90B-116D-41E0-A5D5-15942FC39098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C905B90B-116D-41E0-A5D5-15942FC39098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C905B90B-116D-41E0-A5D5-15942FC39098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{910D1903-2C2C-4B52-8AFF-0A88A40C127A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{910D1903-2C2C-4B52-8AFF-0A88A40C127A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{910D1903-2C2C-4B52-8AFF-0A88A40C127A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{910D1903-2C2C-4B52-8AFF-0A88A40C127A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFA8B5FB-2F98-4187-B9D9-CB32E1443137}
+	EndGlobalSection
+EndGlobal

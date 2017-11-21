@@ -1,0 +1,26 @@
+﻿@using CourseLister.Models
+@model HomeViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+@if (Model.Authorized)
+{
+    Html.RenderPartial("_CourseLister", Model);
+}
+else
+{
+    if (ViewBag.error == null)
+    {
+        <div class="alert alert-info" role="alert">
+            Please Sign In.
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.error
+        </div>
+    }
+}
