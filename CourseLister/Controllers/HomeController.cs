@@ -47,29 +47,39 @@ namespace CourseLister.Controllers
         }
 
         [HttpPost]
-        public async Task<FileStreamResult> Index(HomeViewModel viewModel)
+        public async Task<ActionResult> Index(HomeViewModel viewModel)
         {
-            var client = new AccountsClient();
-            var courses = await client.GetAllCourses(viewModel.CanvasAccountId, viewModel.Query);
-
-            var stream = new MemoryStream();
-
-            var writer = new StreamWriter(stream);
-
-            foreach(var course in courses.Where(x => x.AccountId == viewModel.CanvasAccountId))
+            if (ModelState.IsValid)
             {
-                writer.Write($"{course.Id}, {course.CourseCode}, {course.SisCourseId}, {course.Name}\n");
+                var client = new AccountsClient();
+                IEnumerable<Course> courses = null;
+                try
+                {
+                    courses = await client.GetAllCourses(viewModel.CanvasAccountId, viewModel.Query);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(nameof(viewModel.CanvasAccountId), ex);
+                    return View(viewModel);
+                }
+
+                var stream = new MemoryStream();
+                var writer = new StreamWriter(stream);
+                foreach (var course in courses.Where(x => x.AccountId == viewModel.CanvasAccountId))
+                {
+                    writer.Write($"{course.Id}, {course.CourseCode}, {course.SisCourseId}, {course.Name}\n");
+                }
+                writer.Flush();
+                stream.Position = 0;
+
+                return new FileStreamResult(stream, "text/csv")
+                {
+                    FileDownloadName = "Export.csv"
+                };
             }
 
-            writer.Flush();
-            stream.Position = 0;
-
-            return new FileStreamResult(stream, "text/csv")
-            {
-                FileDownloadName = "Export.csv"
-            };
+            return View(viewModel);
         }
-
 
         #region LoginHelper
         [AllowAnonymous]
@@ -92,7 +102,12 @@ namespace CourseLister.Controllers
             var authenticationManager = HttpContext.GetOwinContext().Authentication;
             authenticationManager.SignOut("ExternalCookie");
 
-            return RedirectToAction("Index");
+            return RedirectToAction("LoggedOut");
+        }
+
+        public ActionResult LoggedOut()
+        {
+            return View();
         }
 
         private async Task<bool> Authorized(string accountId)
